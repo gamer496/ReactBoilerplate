@@ -1,9 +1,10 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
     'script!jquery/dist/jquery.min.js',
-    'script!foundation-sites/dist/foundation.min.js',
+    'script!foundation-sites/dist/js/foundation.min.js',
     './app/app.jsx'
   ],
 
@@ -25,13 +26,12 @@ module.exports = {
 
   resolve: {
     root: __dirname,
-    alias: {
+    alias:{
       Main: 'app/components/Main.jsx',
       applicationStyles: 'app/styles/app.scss'
     },
     extensions: ['', '.js', '.jsx']
   },
-
   module: {
     loaders: [
       {
@@ -44,10 +44,10 @@ module.exports = {
       }
     ]
   },
-
+  sassLoader: {
+    includePaths: [
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
+    ]
+  },
   devtool: 'cheap-module-eval-source-map'
 };
-
-/*note I think this is a bug with foundation*/
-/*if after npm install webpack fails to find foundation directory run*/
-/*npm i -D css-loader@0.23.1 script-loader@0.6.1 style-loader@0.13.0 jquery@2.2.1 foundation-sites@6.2.0*/
